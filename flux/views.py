@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def main_flux(request):
+    return render(request, "main_flux.html")
