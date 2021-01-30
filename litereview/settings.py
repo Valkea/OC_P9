@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'flux',
+    # 'flux',
+    # 'apps.auth',
+    'apps.reviews',
+    'apps.user_graph',
 ]
 
 MIDDLEWARE = [
@@ -123,4 +126,4 @@ STATIC_URL = '/static/'
 
 
 # Define the default AUTH_USER_MODEL value
-AUTH_USER_MODEL = 'flux.User'
+AUTH_USER_MODEL = 'user_graph.User'  # TODO ICI

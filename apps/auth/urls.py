@@ -1,4 +1,4 @@
-"""litereview URL Configuration
+"""litereview/flux URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -13,13 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+
+from apps.auth import views
+
+app_name = "user_graph"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path('', include('flux.urls')),  # TODO ICI
-    # path('', include('apps.auth.urls')),
-    path('', include('apps.reviews.urls')),
-    path('', include('apps.user_graph.urls')),
+    path('auth', views.main_auth, name='main_auth'),
 ]
