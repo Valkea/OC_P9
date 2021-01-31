@@ -20,5 +20,7 @@ from apps.reviews import views
 app_name = "reviews"
 
 urlpatterns = [
-    path('', views.main_reviews, name='main_reviews'),
+    path("", views.main_reviews, name="main_reviews"),
+    path("ticket/", views.add_ticket, name="add_ticket"),
+    path("ticket/<int:ticket_id>", views.add_ticket, name="add_ticket"),
 ]

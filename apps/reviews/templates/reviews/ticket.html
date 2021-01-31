@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<p>Hello from <strong>ticket {{id}}</strong> app main.html'</p>
+<form method="POST" action="{% url 'reviews:add_ticket' %}" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form }}
+	<input type='submit'>
+</form>
+
+{% endblock %}
