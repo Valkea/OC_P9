@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from apps.reviews.forms import TicketForm
-from apps.reviews.models import Ticket
+from apps.reviews.forms import TicketForm, ReviewForm
+from apps.reviews.models import Ticket, Review
+
 # from apps.user_graph.models import User
 
 
@@ -18,7 +19,7 @@ def add_ticket(request, ticket_id=None):
     if request.method == "GET":
         print("GET:", ticket_instance, ticket_id)
         form = TicketForm(instance=ticket_instance)
-        return render(request, 'reviews/ticket.html', locals())
+        return render(request, "reviews/ticket.html", locals())
 
     elif request.method == "POST":
         print("POST:", ticket_instance, ticket_id)
@@ -27,4 +28,25 @@ def add_ticket(request, ticket_id=None):
         if form.is_valid():
             ticket = form.save()
 
-        return redirect('reviews:main_reviews')
+        return redirect("reviews:main_reviews")
+
+
+def add_review(request, review_id=None):
+
+    review_instance = get_object_or_404(Review, pk=review_id) if review_id else None
+
+    if request.method == "GET":
+        print("GET:", review_instance, review_id)
+        form = ReviewForm(instance=review_instance)
+        return render(request, "reviews/review.html", locals())
+
+    elif request.method == "POST":
+        print("POST:", review_instance, review_id)
+        form = ReviewForm(request.POST, request.FILES, instance=review_instance)
+
+        if form.is_valid():
+            review = form.save()
+        else:
+            print("ERREUR FORMULAIRE")  # TODO ICI
+
+        return redirect("reviews:main_reviews")
