@@ -10,11 +10,11 @@ class Ticket(models.Model):
     description = models.TextField(max_length=2048, blank=True)
 
     user = models.ForeignKey(
-            to=settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE,
-            )
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
 
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='%Y/%m/%d')
 
     time_created = models.DateTimeField(auto_now_add=True)
 
@@ -22,18 +22,18 @@ class Ticket(models.Model):
 class Review(models.Model):
 
     ticket = models.ForeignKey(
-            to=Ticket,
-            on_delete=models.CASCADE,
-            )
+        to=Ticket,
+        on_delete=models.CASCADE,
+    )
 
     rating = models.PositiveSmallIntegerField(
-            validators=[MinValueValidator(0), MaxValueValidator(5)],
-            )
+        validators=[MinValueValidator(0), MaxValueValidator(5)],
+    )
 
     user = models.ForeignKey(
-            to=settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE,
-            )
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
 
     headline = models.CharField(max_length=128)
 

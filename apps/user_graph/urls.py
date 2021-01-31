@@ -20,5 +20,5 @@ from apps.user_graph import views
 app_name = "authentification"
 
 urlpatterns = [
-    path('ugraph', views.main_user_graph, name='main_user_graph'),
+    path("ugraph", views.main_user_graph, name="main_user_graph"),
 ]
