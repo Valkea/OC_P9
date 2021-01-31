@@ -14,7 +14,7 @@ class Ticket(models.Model):
         on_delete=models.CASCADE,
     )
 
-    image = models.ImageField(null=True, blank=True, upload_to='%Y/%m/%d')
+    image = models.ImageField(null=True, blank=True, upload_to="%Y/%m/%d")
 
     time_created = models.DateTimeField(auto_now_add=True)
 
