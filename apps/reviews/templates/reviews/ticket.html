@@ -1,8 +1,21 @@
 {% extends 'main.html' %}
 
 {% block content %}
+
 <p>Hello from <strong>ticket {{id}}</strong> app main.html'</p>
+
+{% if form.instance.id %}
+
+<h2>Modifier votre ticket</h2>
+<form method="POST" action="{% url 'reviews:edit_ticket' ticket_id=form.instance.id %}" enctype="multipart/form-data">
+
+{% else %}
+
+<h2>Créer un ticket</h2>
 <form method="POST" action="{% url 'reviews:add_ticket' %}" enctype="multipart/form-data">
+
+{% endif %}
+
 	{% csrf_token %}
 	{{ form }}
 	<input type='submit'>
