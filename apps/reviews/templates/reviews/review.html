@@ -15,7 +15,7 @@
 	{% if form.instance.id %}
 
 		<h2>Modifier votre critique</h2>
-		<form method="POST" action="{% url 'reviews:edit_review' ticket_id=form.instance.id %}" enctype="multipart/form-data">
+		<form method="POST" action="{% url 'reviews:edit_review' review_id=form.instance.id %}" enctype="multipart/form-data">
 
 	{% else %}
 

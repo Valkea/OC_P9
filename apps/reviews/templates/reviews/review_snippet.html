@@ -1,0 +1,18 @@
+<div style="border: 1px solid #FF0000">
+
+	<p>
+		<span>{{post.user.username}} a publié une critique (review)</span> | 
+		<span>Date: {{post.time_created}}</span>
+	</p>
+
+	<p>
+	Headline: <a href='{% url 'reviews:edit_review' review_id=post.id %}'>{{post.headline}}</a>
+	</p>
+	<p>Body: {{post.body}}</p>
+	<p>Rating: {{post.rating}}</p>
+
+	{% with post=post.ticket hide_header=True %}
+		{% include 'reviews/ticket_snippet.html' %}
+	{% endwith %}
+
+</div>

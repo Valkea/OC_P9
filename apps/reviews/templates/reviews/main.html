@@ -1,22 +1,22 @@
 {% extends 'main.html' %}
 
 {% block content %}
+
 	<p>Hello from <strong>reviews</strong> app main.html'</p>
-	<a href="{% url 'reviews:add_ticket' %}">Demander une critique (new ticket)</a>
-	<a href="{% url 'reviews:add_review' %}">Créer une critique (new review)</a>
-	{% for ticket in tickets %}
-	<div>
-		<p>ID: {{ticket.id}}</p>
-		<p>Title: <a href='{% url 'reviews:edit_ticket' ticket_id=ticket.id %}'>{{ticket.title}}</a></p>
-		<p>Desc: {{ticket.description}}</p>
-		<p>Date: {{ticket.time_created}}</p>
-		<p>User id: {{ticket.user_id}}</p>
-		{% if ticket.image %}
-			<img src="{{ticket.image.url}}" alt="cover image"/>
-		{% else %}
-			<p>Pas d'image</p>
+	<a class="btn btn-primary" href="{% url 'reviews:add_ticket' %}">Demander une critique (new ticket)</a>
+	<a class="btn btn-primary" href="{% url 'reviews:add_review' %}">Créer une critique (new review)</a>
+	<br><br>
+
+	{% for post in posts %}
+
+		{% if post.content_type == 'TICKET' %}
+			{% include 'reviews/ticket_snippet.html' %}
+		{% elif post.content_type == 'REVIEW' %}
+			{% include 'reviews/review_snippet.html' %}
 		{% endif %}
-	</div>
-	<hr>
+
+		<hr>
+
 	{% endfor %}
+
 {% endblock %}

@@ -1,3 +1,6 @@
+from itertools import chain
+
+from django.db.models import CharField, Value
 from django.shortcuts import render, redirect, get_object_or_404
 
 from apps.reviews.forms import TicketForm, ReviewForm
@@ -8,7 +11,22 @@ from apps.reviews.models import Ticket, Review
 
 def main_reviews(request):
     tickets = Ticket.objects.all()
-    return render(request, "reviews/main.html", locals())
+    reviews = Review.objects.all()
+    # reviews = Review.objects.prefetch_related('ticket_id').all()
+
+    tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
+    reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
+
+    #  combine and sort the two types of posts
+    posts = sorted(
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True
+    )
+
+    # print('DEBUG:', tickets[0].user)
+    return render(request, "reviews/main.html", {'posts': posts})
+    # return render(request, "reviews/main.html", locals())
 
 
 def add_ticket(request, ticket_id=None):
