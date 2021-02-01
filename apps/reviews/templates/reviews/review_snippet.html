@@ -11,7 +11,7 @@
 	<p>Body: {{post.body}}</p>
 	<p>Rating: {{post.rating}}</p>
 
-	{% with post=post.ticket hide_header=True %}
+	{% with post=post.ticket hide_header=True review_id=post.id has_review=post.has_review %}
 		{% include 'reviews/ticket_snippet.html' %}
 	{% endwith %}
 

@@ -23,6 +23,7 @@ urlpatterns = [
     path("", views.main_reviews, name="main_reviews"),
     path("ticket/", views.add_ticket, name="add_ticket"),
     path("ticket/<int:ticket_id>", views.add_ticket, name="edit_ticket"),
-    path("review/", views.add_review, name="add_review"),
+    path("review/", views.new_review, name="new_review"),
     path("review/<int:review_id>", views.add_review, name="edit_review"),
+    path("review/ticket/<int:ticket_id>", views.add_review, name="add_review"),
 ]

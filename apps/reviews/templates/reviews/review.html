@@ -16,16 +16,32 @@
 
 		<h2>Modifier votre critique</h2>
 		<form method="POST" action="{% url 'reviews:edit_review' review_id=form.instance.id %}" enctype="multipart/form-data">
+	{% elif ticket_instance.id %}
+
+		<h2>Créer une critique</h2>
+		<form method="POST" action="{% url 'reviews:add_review' ticket_id=ticket_instance.id%}" enctype="multipart/form-data">
 
 	{% else %}
 
-		<h2>Créer une critique</h2>
-		<form method="POST" action="{% url 'reviews:add_review' %}" enctype="multipart/form-data">
+		<h2>Créer un ticket et une critique</h2>
+		<form method="POST" action="{% url 'reviews:new_review'%}" enctype="multipart/form-data">
 
 	{% endif %}
 
 	{% csrf_token %}
 	{# {{ form }} #}
+
+	{% if ticket_instance.id %}
+	<h3>Vous êtes entrain de poster en réponse à :</h3>
+		{% with post=ticket_instance has_review=True %}
+			{% include 'reviews/ticket_snippet.html' %}
+		{% endwith %}
+	{% else %}
+		<h3>Livre / Article</h3>
+		{{ formticket.as_p }}
+	{% endif %}
+
+	<h3>Critique</h3>
 	{% for field in form %}
 
 		<div>

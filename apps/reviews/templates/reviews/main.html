@@ -4,13 +4,15 @@
 
 	<p>Hello from <strong>reviews</strong> app main.html'</p>
 	<a class="btn btn-primary" href="{% url 'reviews:add_ticket' %}">Demander une critique (new ticket)</a>
-	<a class="btn btn-primary" href="{% url 'reviews:add_review' %}">Créer une critique (new review)</a>
+	<a class="btn btn-primary" href="{% url 'reviews:new_review' %}">Créer une critique (new review)</a>
 	<br><br>
 
 	{% for post in posts %}
 
 		{% if post.content_type == 'TICKET' %}
-			{% include 'reviews/ticket_snippet.html' %}
+			{% with has_review=post.has_review %}
+				{% include 'reviews/ticket_snippet.html' %}
+			{% endwith %}
 		{% elif post.content_type == 'REVIEW' %}
 			{% include 'reviews/review_snippet.html' %}
 		{% endif %}
