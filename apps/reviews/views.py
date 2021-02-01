@@ -27,8 +27,9 @@ def add_ticket(request, ticket_id=None):
 
         if form.is_valid():
             ticket = form.save()
+            return redirect("reviews:main_reviews")
 
-        return redirect("reviews:main_reviews")
+        return render(request, "reviews/ticket.html", locals())
 
 
 def add_review(request, review_id=None):
@@ -46,7 +47,6 @@ def add_review(request, review_id=None):
 
         if form.is_valid():
             review = form.save()
-        else:
-            print("ERREUR FORMULAIRE")  # TODO ICI
+            return redirect("reviews:main_reviews")
 
-        return redirect("reviews:main_reviews")
+        return render(request, "reviews/review.html", locals())
