@@ -19,13 +19,11 @@ def main_reviews(request):
 
     #  combine and sort the two types of posts
     posts = sorted(
-        chain(reviews, tickets),
-        key=lambda post: post.time_created,
-        reverse=True
+        chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
     )
 
     # print('DEBUG:', tickets[0].user)
-    return render(request, "reviews/main.html", {'posts': posts})
+    return render(request, "reviews/main.html", {"posts": posts})
     # return render(request, "reviews/main.html", locals())
 
 
