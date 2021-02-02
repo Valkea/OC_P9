@@ -41,10 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # 'flux',
-    # 'apps.auth',
     "apps.reviews",
     "apps.user_graph",
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
