@@ -14,5 +14,6 @@
 	{% with post=post.ticket hide_header=True review_id=post.id has_review=post.has_review %}
 		{% include 'reviews/ticket_snippet.html' %}
 	{% endwith %}
+	<a class="btn btn-primary" href="{% url 'reviews:del_review' review_id=post.id%}">Supprimer cette critique</a>
 
 </div>

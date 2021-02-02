@@ -93,6 +93,13 @@ def add_ticket(request, ticket_id=None):
         return render(request, "reviews/ticket.html", locals())
 
 
+def delete_ticket(request, ticket_id):
+
+    ticket_instance = get_object_or_404(Ticket, pk=ticket_id)
+    ticket_instance.delete()
+    return redirect("reviews:main_reviews")
+
+
 def new_review(request, review_id=None, ticket_id=None):
 
     print("new_review:", request.method, review_id, ticket_id)
@@ -153,3 +160,10 @@ def add_review(request, review_id=None, ticket_id=None):
             return redirect("reviews:main_reviews")
 
         return render(request, "reviews/review.html", locals())
+
+
+def delete_review(request, review_id):
+
+    review_instance = get_object_or_404(Review, pk=review_id)
+    review_instance.delete()
+    return redirect("reviews:main_reviews")
