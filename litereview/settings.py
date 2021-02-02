@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.reviews",
     "apps.user_graph",
-    'django_cleanup.apps.CleanupConfig',
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
@@ -133,6 +133,7 @@ AUTH_USER_MODEL = "user_graph.User"  # TODO ICI
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/auth/login/"
 
 # SMTP settings
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
