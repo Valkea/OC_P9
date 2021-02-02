@@ -90,7 +90,9 @@ def add_ticket(request, ticket_id=None):
         form = TicketForm(request.POST, request.FILES, instance=ticket_instance)
 
         if form.is_valid():
-            ticket = form.save()
+            new_ticket_instance = form.save(commit=False)
+            new_ticket_instance.user = request.user
+            new_ticket_instance.save()
             return redirect("reviews:main_reviews")
 
         return render(request, "reviews/ticket.html", locals())
@@ -126,10 +128,12 @@ def new_review(request, review_id=None, ticket_id=None):
 
         if formticket.is_valid():
             new_ticket_instance = formticket.save(commit=False)
+            new_ticket_instance.user = request.user
 
             if form.is_valid():
                 new_review_instance = form.save(commit=False)
                 new_review_instance.ticket = new_ticket_instance
+                new_review_instance.user = request.user
                 new_ticket_instance.save()
                 new_review_instance.save()
                 return redirect("reviews:main_reviews")
@@ -162,6 +166,7 @@ def add_review(request, review_id=None, ticket_id=None):
         if form.is_valid():
             new_review_instance = form.save(commit=False)
             new_review_instance.ticket = ticket_instance
+            new_review_instance.user = request.user
             new_review_instance.save()
             return redirect("reviews:main_reviews")
 

@@ -14,12 +14,11 @@ class TicketForm(ModelForm):
 
     class Meta:
         model = Ticket
-        fields = ["title", "description", "image", "user"]
+        fields = ["title", "description", "image"]
         # widgets = {'user': HiddenInput()}
 
 
 class ReviewForm(ModelForm):
     class Meta:
         model = Review
-        # fields = ["ticket", "user", "headline", "rating", "body"]
-        fields = ["user", "headline", "rating", "body"]
+        fields = ["headline", "rating", "body"]

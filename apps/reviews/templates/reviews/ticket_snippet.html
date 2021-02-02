@@ -1,11 +1,9 @@
 <div style="border: 1px solid #FF0">
 
-	{% if hide_header != True %}
-		<p>
-			<span>{{post.user.username}} a demandé une critique (ticket)</span> | 
-			<span>Date: {{post.time_created}}</span>
-		</p>
-	{% endif %}
+	<p>
+		<span>{{post.user.username}} a demandé une critique (ticket)</span> | 
+		<span>Date: {{post.time_created}}</span>
+	</p>
 
 	<!--p>ID: {{post.id}}</p-->
 	<p>Title: <a href='{% url 'reviews:edit_ticket' ticket_id=post.id %}'>{{post.title}}</a></p>
