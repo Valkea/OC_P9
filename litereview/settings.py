@@ -130,3 +130,20 @@ STATIC_URL = "/static/"
 
 # Define the default AUTH_USER_MODEL value
 AUTH_USER_MODEL = "user_graph.User"  # TODO ICI
+
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = "/"
+
+# SMTP settings
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django_smtp_ssl.SSLEmailBackend"
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_USER_TLS = True
+
+EMAIL_HOST = "smtp.googlemail.com"
+EMAIL_HOST_USER = "MY-EMAIL"
+EMAIL_HOST_PASSWORD = "MY-PASSWORD"
+EMAIL_PORT = 465
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
