@@ -5,15 +5,16 @@
 		<span>Date: {{post.time_created}}</span>
 	</p>
 
-	<p>
-	Headline: <a href='{% url 'reviews:edit_review' review_id=post.id %}'>{{post.headline}}</a>
-	</p>
+	<p>Headline: {{post.headline}}</p>
 	<p>Body: {{post.body}}</p>
 	<p>Rating: {{post.rating}}</p>
 
 	{% with post=post.ticket review_id=post.id has_review=post.has_review %}
 		{% include 'reviews/ticket_snippet.html' %}
 	{% endwith %}
-	<a class="btn btn-primary" href="{% url 'reviews:del_review' review_id=post.id%}">Supprimer cette critique</a>
 
+	{% if post.user == user %}
+		<a class="btn btn-primary" href="{% url 'reviews:del_review' review_id=post.id%}">Supprimer cette critique</a>
+		<a class="btn btn-primary" href="{% url 'reviews:edit_review' review_id=post.id %}">Modifier cette critique</a></p>
+	{% endif %}
 </div>

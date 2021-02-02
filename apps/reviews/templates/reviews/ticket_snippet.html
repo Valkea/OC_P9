@@ -5,8 +5,7 @@
 		<span>Date: {{post.time_created}}</span>
 	</p>
 
-	<!--p>ID: {{post.id}}</p-->
-	<p>Title: <a href='{% url 'reviews:edit_ticket' ticket_id=post.id %}'>{{post.title}}</a></p>
+	<p>Title: {{post.title}}</p>
 	<p>Desc: {{post.description}}</p>
 	<p>User id: {{post.user_id}}</p>
 	{% if post.image %}
@@ -18,6 +17,10 @@
 	{% if not has_review %}
 		<a class="btn btn-primary" href="{% url 'reviews:add_review' ticket_id=post.id%}">Ajouter une critique</a>
 	{% endif %}
-	<a class="btn btn-primary" href="{% url 'reviews:del_ticket' ticket_id=post.id%}">Supprimer ce ticket</a>
+
+	{% if post.user == user %}
+		<a class="btn btn-primary" href="{% url 'reviews:del_ticket' ticket_id=post.id%}">Supprimer ce ticket</a>
+		<a class="btn btn-primary" href="{% url 'reviews:edit_ticket' ticket_id=post.id %}">Modifier ce ticket</a></p>
+	{% endif %}
 
 </div>
