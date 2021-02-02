@@ -1,8 +1,12 @@
 <div style="border: 1px solid #FF0">
 
 	<p>
-		<span>{{post.user.username}} a demandé une critique (ticket)</span> | 
-		<span>Date: {{post.time_created}}</span>
+	{% if post.user == user %}
+		<span>Vous avez demandé une critique (ticket)</span> |
+	{% else %}
+		<span>{{post.user.username}} a demandé une critique (ticket)</span> |
+	{% endif %}
+		<span>Date: {{post.time_created|date:'H:i, d M Y' }}</span>
 	</p>
 
 	<p>Title: {{post.title}}</p>

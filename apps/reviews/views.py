@@ -11,7 +11,7 @@ from apps.reviews.models import Ticket, Review
 
 
 @login_required
-def main_reviews(request):
+def main_page(request):
 
     # tickets = Ticket.objects.all()
     # reviews = Review.objects.all()
@@ -76,6 +76,43 @@ def main_reviews(request):
 
 
 @login_required
+def user_posts(request):
+
+    tickets_without_review = (
+        Ticket.objects.filter(review__isnull=True).filter(user=request.user).all()
+    )
+    tickets_without_review = tickets_without_review.annotate(
+        content_type=Value("TICKET", CharField()),
+        has_review=Value(False, BooleanField()),
+    )
+
+    tickets_with_review = (
+        Ticket.objects.filter(review__isnull=False).filter(user=request.user).all()
+    )
+    tickets_with_review = tickets_with_review.annotate(
+        content_type=Value("TICKET", CharField()),
+        has_review=Value(True, BooleanField()),
+    )
+
+    reviews = (
+        Review.objects.annotate(
+            content_type=Value("REVIEW", CharField()),
+            has_review=Value(True, BooleanField()),
+        )
+        .filter(user=request.user)
+        .all()
+    )
+
+    posts = sorted(
+        chain(reviews, tickets_with_review, tickets_without_review),
+        key=lambda post: post.time_created,
+        reverse=True,
+    )
+
+    return render(request, "reviews/main.html", {"posts": posts})
+
+
+@login_required
 def add_ticket(request, ticket_id=None):
 
     ticket_instance = get_object_or_404(Ticket, pk=ticket_id) if ticket_id else None
@@ -93,7 +130,7 @@ def add_ticket(request, ticket_id=None):
             new_ticket_instance = form.save(commit=False)
             new_ticket_instance.user = request.user
             new_ticket_instance.save()
-            return redirect("reviews:main_reviews")
+            return redirect("reviews:main_page")
 
         return render(request, "reviews/ticket.html", locals())
 
@@ -103,7 +140,7 @@ def delete_ticket(request, ticket_id):
 
     ticket_instance = get_object_or_404(Ticket, pk=ticket_id)
     ticket_instance.delete()
-    return redirect("reviews:main_reviews")
+    return redirect("reviews:main_page")
 
 
 @login_required
@@ -136,7 +173,7 @@ def new_review(request, review_id=None, ticket_id=None):
                 new_review_instance.user = request.user
                 new_ticket_instance.save()
                 new_review_instance.save()
-                return redirect("reviews:main_reviews")
+                return redirect("reviews:main_page")
 
         return render(request, "reviews/review.html", locals())
 
@@ -168,7 +205,7 @@ def add_review(request, review_id=None, ticket_id=None):
             new_review_instance.ticket = ticket_instance
             new_review_instance.user = request.user
             new_review_instance.save()
-            return redirect("reviews:main_reviews")
+            return redirect("reviews:main_page")
 
         return render(request, "reviews/review.html", locals())
 
@@ -178,4 +215,4 @@ def delete_review(request, review_id):
 
     review_instance = get_object_or_404(Review, pk=review_id)
     review_instance.delete()
-    return redirect("reviews:main_reviews")
+    return redirect("reviews:main_page")

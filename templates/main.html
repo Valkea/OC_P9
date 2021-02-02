@@ -13,8 +13,8 @@
 		{% if user.is_authenticated %}
 			<li>User: {{ user.get_username }}</li>
 			<nav>
-				<li><a class="btn btn-primary" href='/'>Flux</a></li>
-				<li><a class="btn btn-primary" href='/posts'>Posts</a></li>
+				<li><a class="btn btn-primary" href="{% url 'reviews:main_page' %}">Flux</a></li>
+				<li><a class="btn btn-primary" href="{% url 'reviews:user_posts' %}">Posts</a></li>
 				<li><a class="btn btn-primary" href='/ugraph'>Abonnements</a></li>
 				<li><a class="btn btn-primary "href="{% url 'logout'%}?next={{request.path}}">Se déconnecter</a></li>
 			</nav>
