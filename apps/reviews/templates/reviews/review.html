@@ -4,6 +4,8 @@
 
 	<p>Hello from <strong>review {{id}}</strong> app review.html'</p>
 
+	<div class="container p-3 my-3 border">
+
 	{% if form.errors %}
 		{% for error in form.non_field_errors %}
 			<div class="alert alert-danger">
@@ -55,5 +57,7 @@
 
 		<input type='submit'>
 	</form>
+
+	</div>
 
 {% endblock %}

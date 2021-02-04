@@ -1,4 +1,4 @@
-<div style="border: 1px solid #FF0">
+<div class="container p-3 my-3 border">
 
 	<p>
 	{% if post.user == user %}
@@ -13,7 +13,7 @@
 	<p>Desc: {{post.description}}</p>
 	<p>User id: {{post.user_id}}</p>
 	{% if post.image %}
-		<img src="{{post.image.url}}" alt="cover image"/>
+		<img src="{{post.image.url}}" alt="cover image" class="img-responsive fit-image"/>
 	{% else %}
 		<p>Pas d'image</p>
 	{% endif %}

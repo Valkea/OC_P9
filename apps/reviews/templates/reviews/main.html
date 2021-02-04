@@ -3,6 +3,7 @@
 {% block content %}
 
 	<p>Hello from <strong>reviews</strong> app main.html'</p>
+
 	<a class="btn btn-primary" href="{% url 'reviews:add_ticket' %}">Demander une critique (new ticket)</a>
 	<a class="btn btn-primary" href="{% url 'reviews:new_review' %}">Créer une critique (new review)</a>
 	<br><br>
@@ -16,8 +17,6 @@
 		{% elif post.content_type == 'REVIEW' %}
 			{% include 'reviews/review_snippet.html' %}
 		{% endif %}
-
-		<hr>
 
 	{% endfor %}
 

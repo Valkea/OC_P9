@@ -1,7 +1,8 @@
 {% extends "main.html" %}
 
 {% block content %}
-  <h2>Inscription</h2>
+<div class="container p-3 my-3 border">
+  <h1>Inscription</h1>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -18,4 +19,5 @@
     {% endfor %}
     <button class="btn btn-primary" type="submit">Soumettre</button>
   </form>
+</div>
 {% endblock %}
