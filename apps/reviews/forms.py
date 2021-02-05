@@ -17,8 +17,8 @@ class TicketForm(ModelForm):
         fields = ["title", "description", "image"]
         # widgets = {'user': HiddenInput()}
         labels = {
-            'title': 'Titre',
-            'description': 'Description',
+            "title": "Titre",
+            "description": "Description",
         }
 
 
@@ -28,7 +28,7 @@ class ReviewForm(ModelForm):
         fields = ["headline", "rating", "body"]
 
         labels = {
-            'headline': 'Titre de la revue',
-            'rating': 'Evaluation',
-            'body': 'Revue',
+            "headline": "Titre de la revue",
+            "rating": "Evaluation",
+            "body": "Revue",
         }
