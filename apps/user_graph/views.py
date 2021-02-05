@@ -79,12 +79,12 @@ def signup(request):
         form = SignUpForm(request.POST)
 
         try:
-            user = User.objects.get(username=request.POST['username'])
+            user = User.objects.get(username=request.POST["username"])
             form.error = "Ce nom d'utilisateur est déjà pris"
         except User.DoesNotExist:
 
             try:
-                user = User.objects.get(email=request.POST['email'])
+                user = User.objects.get(email=request.POST["email"])
                 print(user, user.email)
                 form.error = "Cette adresse email est déjà enregistrée"
 

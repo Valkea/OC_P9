@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INTERNAL_IPS = [
-    '127.0.0.1',
+    "127.0.0.1",
 ]
 
 
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "apps.user_graph",
     "django_cleanup.apps.CleanupConfig",
     # 'django.contrib.staticfiles',  # debug_toolbar
-    'debug_toolbar',  # debug_toolbar
+    "debug_toolbar",  # debug_toolbar
 ]
 
 MIDDLEWARE = [

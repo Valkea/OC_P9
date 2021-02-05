@@ -25,5 +25,5 @@ urlpatterns = [
     # path("", include('apps.auth.urls')),
     path("", include("apps.reviews.urls")),
     path("", include("apps.user_graph.urls")),
-    path('__debug__/', include(debug_toolbar.urls)),
+    path("__debug__/", include(debug_toolbar.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
