@@ -4,41 +4,53 @@
 
 <div class="container p-3 my-3 border">
 
-  	<h2>Connexion</h2>
 
-	{% if form.errors %}
-	<div class="alert alert-danger">
-		<strong>Votre nom d'utilisateur et votre mot de passe ne vont pas ensemble. Essayez à nouveau.</strong>
+	<div class="login__container">
+		<div class="login__subscribe">
+  			<h2>Inscrivez vous maintenant</h2>
+			<br>
+			<a class="btn btn-primary" href="{% url 'signup' %}">S'inscrire</a>
+		</div>
+
+		<div class="login__connect">
+  			<h2>Connectez-vous</h2>
+
+			{% if form.errors %}
+			<div class="alert alert-danger">
+				<strong>Votre nom d'utilisateur et votre mot de passe ne vont pas ensemble. Essayez à nouveau.</strong>
+			</div>
+			{% endif %}
+
+			{% if next %}
+			{% if user.is_authenticated %}
+			<div class="alert alert-danger">
+				<strong>Votre compte n'a pas accès à cette page. Veuillez d'abord vous identifiez avec un compte habilité.</strong>
+			</div>
+			{# {% else %} #}
+			{# <p>Vous devez vous identifiez pour accèder à cette page.</p> #}
+			{% endif %}
+			{% endif %}
+
+			<form method="post" action="{% url 'login' %}" class="login__form">
+				{% csrf_token %}
+				<table class="login__form_table">
+					<tr>
+						<td>{{ form.username.label_tag }}</td>
+						<td>{{ form.username }}</td>
+					</tr>
+					<tr>
+						<td>{{ form.password.label_tag }}</td>
+						<td>{{ form.password }}</td>
+					</tr>
+				</table>
+				<br>
+
+				<input class="btn btn-primary" type="submit" value="S'identifier" />
+				<input type="hidden" name="next" value="{{ next }}" />
+				<a class="btn btn-secondary" href="{% url 'password_reset' %}">Mot de passe perdu ?</a>
+			</form>
+		</div>
 	</div>
-	{% endif %}
-
-	{% if next %}
-	{% if user.is_authenticated %}
-	<div class="alert alert-danger">
-		<strong>Votre compte n'a pas accès à cette page. Veuillez d'abord vous identifiez avec un compte habilité.</strong>
-	</div>
-	{# {% else %} #}
-	{# <p>Vous devez vous identifiez pour accèder à cette page.</p> #}
-	{% endif %}
-	{% endif %}
-
-	<form method="post" action="{% url 'login' %}">
-		{% csrf_token %}
-		<table>
-			<tr>
-				<td>{{ form.username.label_tag }}</td>
-				<td>{{ form.username }}</td>
-			</tr>
-			<tr>
-				<td>{{ form.password.label_tag }}</td>
-				<td>{{ form.password }}</td>
-			</tr>
-		</table>
-		<br>
-		<input class="btn btn-primary" type="submit" value="S'identifier" />
-		<input type="hidden" name="next" value="{{ next }}" />
-		<a class="btn btn-secondary" href="{% url 'password_reset' %}">Mot de passe perdu ?</a>
-	</form>
 </div>
 
 {% endblock %}

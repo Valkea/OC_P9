@@ -14,3 +14,22 @@
 .signup__error {
 	color: grey;
 }
+
+.login__container {
+	display: flex;
+}
+
+.login__connect, .login__subscribe {
+	flex:1
+	margin: auto;
+  	width: 50%;
+	text-align: center;
+}
+
+.login__form {
+	width: 100%;
+}
+
+.login__form_table {
+	margin: 0 auto;
+}
