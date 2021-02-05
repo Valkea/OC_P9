@@ -2,16 +2,16 @@
 
 	<p>
 	{% if post.user == user %}
-		<span>Vous avez demandé une critique (ticket)</span> |
+		<span><strong>Vous</strong> avez demandé une critique (ticket)</span> |
 	{% else %}
-		<span>{{post.user.username}} a demandé une critique (ticket)</span> |
+		<span><strong>{{post.user.username}}</strong> a demandé une critique (ticket)</span> |
 	{% endif %}
-		<span>Date: {{post.time_created|date:'H:i, d M Y' }}</span>
+		<span><strong>Date :</strong> {{post.time_created|date:'H:i, d M Y' }}</span>
 	</p>
 
-	<p>Title: {{post.title}}</p>
-	<p>Desc: {{post.description}}</p>
-	<p>User id: {{post.user_id}}</p>
+	<p><strong>Title :</strong> {{post.title}}</p>
+	<p><strong>Desc :</strong> {{post.description}}</p>
+
 	{% if post.image %}
 		<img src="{{post.image.url}}" alt="cover image" class="img-responsive fit-image"/>
 	{% else %}
@@ -24,7 +24,7 @@
 
 	{% if post.user == user %}
 		<a class="btn btn-primary" href="{% url 'reviews:del_ticket' ticket_id=post.id%}">Supprimer ce ticket</a>
-		<a class="btn btn-primary" href="{% url 'reviews:edit_ticket' ticket_id=post.id %}">Modifier ce ticket</a></p>
+		<a class="btn btn-primary" href="{% url 'reviews:edit_ticket' ticket_id=post.id %}">Modifier ce ticket</a>
 	{% endif %}
 
 </div>

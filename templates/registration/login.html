@@ -4,15 +4,19 @@
 
 <div class="container p-3 my-3 border">
 
-  	<h1>Connexion</h1>
+  	<h2>Connexion</h2>
 
 	{% if form.errors %}
-	<p>Votre nom d'utilisateur et votre mot de passe ne vont pas ensemble. Essayez à nouveau.</p>
+	<div class="alert alert-danger">
+		<strong>Votre nom d'utilisateur et votre mot de passe ne vont pas ensemble. Essayez à nouveau.</strong>
+	</div>
 	{% endif %}
 
 	{% if next %}
 	{% if user.is_authenticated %}
-	<p>Votre compte n'a pas accès à cette page. Veuillez d'abord vous identifiez avec un compte habilité.</p>
+	<div class="alert alert-danger">
+		<strong>Votre compte n'a pas accès à cette page. Veuillez d'abord vous identifiez avec un compte habilité.</strong>
+	</div>
 	{# {% else %} #}
 	{# <p>Vous devez vous identifiez pour accèder à cette page.</p> #}
 	{% endif %}

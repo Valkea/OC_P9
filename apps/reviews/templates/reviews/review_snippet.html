@@ -2,16 +2,16 @@
 
 	<p>
 	{% if post.user == user %}
-		<span>Vous avez publié une critique (review)</span> |
+		<span><strong>Vous</strong> avez publié une critique (review)</span> |
 	{% else %}
-		<span>{{post.user.username}} a publié une critique (review)</span> |
+		<span><strong>{{post.user.username}}</strong> a publié une critique (review)</span> |
 	{% endif %}
-		<span>Date: {{post.time_created|date:'H:i, d M Y' }}</span>
+		<span><strong>Date :</strong> {{post.time_created|date:'H:i, d M Y' }}</span>
 	</p>
 
-	<p>Headline: {{post.headline}}</p>
-	<p>Body: {{post.body}}</p>
-	<p>Rating: {{post.rating}}</p>
+	<p><strong>Titre de revue :</strong> {{post.headline}}</p>
+	<p><strong>Revue :</strong> {{post.body}}</p>
+	<p><strong>Evaluation :</strong> {{post.rating}}</p>
 
 	{% with post=post.ticket review_id=post.id has_review=post.has_review %}
 		{% include 'reviews/ticket_snippet.html' %}
@@ -19,6 +19,6 @@
 
 	{% if post.user == user %}
 		<a class="btn btn-primary" href="{% url 'reviews:del_review' review_id=post.id%}">Supprimer cette critique</a>
-		<a class="btn btn-primary" href="{% url 'reviews:edit_review' review_id=post.id %}">Modifier cette critique</a></p>
+		<a class="btn btn-primary" href="{% url 'reviews:edit_review' review_id=post.id %}">Modifier cette critique</a>
 	{% endif %}
 </div>
