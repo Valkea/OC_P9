@@ -35,7 +35,7 @@
 						<a class="nav-link" href="{% url 'show_user_graph' %}">Abonnements</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{% url 'logout'%}?next={{request.path}}">Se déconnecter</a>
+						<a class="nav-link" href="{% url 'logout'%}">Se déconnecter</a>
 					</li>
 					{% else %}
 					{% url 'login' as logurl %}
@@ -44,7 +44,7 @@
 						<a class="nav-link" href="{% url 'signup' %}">Inscription</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ logurl }}?next={% url 'reviews:main_page' %}">Se connecter</a>
+						<a class="nav-link" href="{{ logurl }}">Se connecter</a>
 					</li>
 					{# {% endif %} #}
 					{% endif %}
