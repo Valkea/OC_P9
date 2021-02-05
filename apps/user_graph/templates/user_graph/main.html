@@ -1,5 +1,50 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content %}
-	<p>Hello from <strong>user_graph</strong> app main.html'</p>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/user_graph.css' %}">
+
+	<div class="container p-3 my-3 border">
+
+	<h2>Suivre d'autres utilisateurs</h2>
+
+	{% if msg %}
+	<div class="alert alert-danger">
+		<strong>{{ msg|escape }}</strong>
+	</div>
+	{% endif %}
+
+	<form method="POST" action="{% url 'add_link' %}">
+		{% csrf_token %}
+		<label for="findname">Nom d'utilisateur:</label>
+		<input type='text' name='findname' autofocus/> 
+		<input type="submit" value="Chercher" class="btn btn-primary" />
+	</form>
+</div>
+<div class="container p-3 my-3 border">
+	<h2>Abonnements</h2>
+	{% if following %}
+	<ul>
+		{% for link in following %}
+		<li><div class="following__line"><span class="following__name"><em>{{ link.followed_user.username }}</em> ({{link.followed_user.email}})</span><span><a href='{% url 'remove_link' link.id %}' class='btn btn-secondary'>Désabonner</a></span></div></li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>Vous ne suivez personne pour le moment</p>
+	{% endif %}
+</div>
+
+<div class="container p-3 my-3 border">
+	<h2>Abonnées</h2>
+	{% if followed %}
+	<ul>
+		{% for link in followed %}
+		<li><div class="follower__line"><em>{{ link.user.username }}</em> ({{ link.user.email}})</div></li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>Personne ne vous suit pour le moment</p>
+	{% endif %}
+</div>
+
 {% endblock %}

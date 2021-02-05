@@ -1,0 +1,9 @@
+.fit-image{
+	width: 100%;
+	object-fit: contain;
+	height: 300px; /* only if you want fixed height */
+}
+
+.nav-margin{
+	margin-top:300px;
+}

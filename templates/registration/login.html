@@ -4,6 +4,8 @@
 
 <div class="container p-3 my-3 border">
 
+  	<h1>Connexion</h1>
+
 	{% if form.errors %}
 	<p>Votre nom d'utilisateur et votre mot de passe ne vont pas ensemble. Essayez à nouveau.</p>
 	{% endif %}
@@ -28,14 +30,11 @@
 				<td>{{ form.password }}</td>
 			</tr>
 		</table>
-		<input class="btn btn-primary" type="submit" value="login" />
+		<br>
+		<input class="btn btn-primary" type="submit" value="S'identifier" />
 		<input type="hidden" name="next" value="{{ next }}" />
+		<a class="btn btn-secondary" href="{% url 'password_reset' %}">Mot de passe perdu ?</a>
 	</form>
-
-	{# Assumes you setup the password_reset view in your URLconf #}
-	<br>
-	<p><a class="btn btn-secondary" href="{% url 'password_reset' %}">Mot de passe perdu ?</a></p>
-
 </div>
 
 {% endblock %}

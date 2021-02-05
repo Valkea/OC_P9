@@ -20,5 +20,7 @@ from apps.user_graph import views
 urlpatterns = [
     path("auth/", include("django.contrib.auth.urls")),
     path("auth/signup/", views.signup, name="signup"),
-    path("ugraph", views.main_user_graph, name="main_user_graph"),
+    path("ugraph", views.show_user_graph, name="show_user_graph"),
+    path("ugraph/add", views.add_link, name="add_link"),
+    path("ugraph/del/<int:link_id>", views.remove_link, name="remove_link"),
 ]

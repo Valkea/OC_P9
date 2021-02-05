@@ -1,0 +1,16 @@
+.fakeimg {
+	height: 200px;
+	background: #aaa;
+}
+
+.content {
+	margin-top:70px;
+}
+
+.signup__help {
+	color: grey;
+}
+
+.signup__error {
+	color: grey;
+}

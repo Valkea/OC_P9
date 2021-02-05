@@ -49,13 +49,13 @@ def main_page(request):
     #     chain(reviews, tickets), key=lambda post: post['time_created'], reverse=True
     # )
 
-    tickets_without_review = Ticket.objects.filter(review__isnull=True).all()
+    tickets_without_review = Ticket.objects.filter(review__isnull=True)
     tickets_without_review = tickets_without_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(False, BooleanField()),
     )
 
-    tickets_with_review = Ticket.objects.filter(review__isnull=False).all()
+    tickets_with_review = Ticket.objects.filter(review__isnull=False)
     tickets_with_review = tickets_with_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(True, BooleanField()),
@@ -78,30 +78,26 @@ def main_page(request):
 @login_required
 def user_posts(request):
 
-    tickets_without_review = (
-        Ticket.objects.filter(review__isnull=True).filter(user=request.user).all()
+    tickets_without_review = Ticket.objects.filter(review__isnull=True).filter(
+        user=request.user
     )
     tickets_without_review = tickets_without_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(False, BooleanField()),
     )
 
-    tickets_with_review = (
-        Ticket.objects.filter(review__isnull=False).filter(user=request.user).all()
+    tickets_with_review = Ticket.objects.filter(review__isnull=False).filter(
+        user=request.user
     )
     tickets_with_review = tickets_with_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(True, BooleanField()),
     )
 
-    reviews = (
-        Review.objects.annotate(
-            content_type=Value("REVIEW", CharField()),
-            has_review=Value(True, BooleanField()),
-        )
-        .filter(user=request.user)
-        .all()
-    )
+    reviews = Review.objects.annotate(
+        content_type=Value("REVIEW", CharField()),
+        has_review=Value(True, BooleanField()),
+    ).filter(user=request.user)
 
     posts = sorted(
         chain(reviews, tickets_with_review, tickets_without_review),
