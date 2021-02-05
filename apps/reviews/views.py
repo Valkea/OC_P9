@@ -91,7 +91,13 @@ def main_page(request):
         reverse=True,
     )
 
-    return render(request, "reviews/main.html", {"posts": posts, "source": "flux"})
+    request.session["_source"] = "flux"
+
+    return render(
+        request,
+        "reviews/main.html",
+        {"posts": posts, "source": request.session.get("_source")},
+    )
 
 
 @login_required
@@ -124,7 +130,13 @@ def user_posts(request):
         reverse=True,
     )
 
-    return render(request, "reviews/main.html", {"posts": posts, "source": "posts" })
+    request.session["_source"] = "posts"
+
+    return render(
+        request,
+        "reviews/main.html",
+        {"posts": posts, "source": request.session.get("_source")},
+    )
 
 
 @login_required
@@ -145,7 +157,8 @@ def add_ticket(request, ticket_id=None):
             new_ticket_instance = form.save(commit=False)
             new_ticket_instance.user = request.user
             new_ticket_instance.save()
-            return redirect("reviews:main_page")
+
+            return redirect_flux(request.session.get("_source"))
 
         return render(request, "reviews/ticket.html", locals())
 
@@ -155,7 +168,7 @@ def delete_ticket(request, ticket_id):
 
     ticket_instance = get_object_or_404(Ticket, pk=ticket_id)
     ticket_instance.delete()
-    return redirect("reviews:main_page")
+    return redirect_flux(request.session.get("_source"))
 
 
 @login_required
@@ -188,7 +201,8 @@ def new_review(request, review_id=None, ticket_id=None):
                 new_review_instance.user = request.user
                 new_ticket_instance.save()
                 new_review_instance.save()
-                return redirect("reviews:main_page")
+
+                return redirect_flux(request.session.get("_source"))
 
         return render(request, "reviews/review.html", locals())
 
@@ -220,7 +234,8 @@ def add_review(request, review_id=None, ticket_id=None):
             new_review_instance.ticket = ticket_instance
             new_review_instance.user = request.user
             new_review_instance.save()
-            return redirect("reviews:main_page")
+
+            return redirect_flux(request.session.get("_source"))
 
         return render(request, "reviews/review.html", locals())
 
@@ -230,4 +245,12 @@ def delete_review(request, review_id):
 
     review_instance = get_object_or_404(Review, pk=review_id)
     review_instance.delete()
-    return redirect("reviews:main_page")
+    return redirect_flux(request.session.get("_source"))
+
+
+def redirect_flux(source):
+    print("redirect_flux:", source)
+    if source == "posts":
+        return redirect("reviews:user_posts")
+    else:
+        return redirect("reviews:main_page")
