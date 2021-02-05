@@ -9,4 +9,6 @@
 
 .follower__line {
 	margin:20px;
+	display:flex;
+	margin:5px;
 }

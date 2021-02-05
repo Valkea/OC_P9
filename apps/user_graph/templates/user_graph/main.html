@@ -39,7 +39,7 @@
 	{% if followed %}
 	<ul>
 		{% for link in followed %}
-		<li><div class="follower__line"><em>{{ link.user.username }}</em> ({{ link.user.email}})</div></li>
+		<li><div class="follower__line"><span class="following__name"><em>{{ link.user.username }}</em> ({{ link.user.email}})</span></div></li>
 		{% endfor %}
 	</ul>
 	{% else %}
