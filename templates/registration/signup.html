@@ -6,6 +6,12 @@
 
   	<h1>Inscription</h1>
 
+	{% if form.error %}
+	<div class="alert alert-danger">
+		<strong>{{ form.error|escape }}</strong>
+	</div>
+	{% endif %}
+
   	<form method="post">
 		{% csrf_token %}
 		{% for field in form %}

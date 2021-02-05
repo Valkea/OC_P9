@@ -26,10 +26,10 @@ def show_user_graph(request, msg=None):
     )
 
 
+@login_required
 def add_link(request):
 
     if request.method == "POST":
-        print("ADD LINK - POST show_user_graph", request.POST, request.POST["findname"])
 
         user_name = request.POST["findname"]
 
@@ -66,22 +66,48 @@ def add_link(request):
     return redirect("show_user_graph")
 
 
+@login_required
 def remove_link(request, link_id):
-    print("REMOVE LINK:", link_id)
+
     UserFollows.objects.filter(id=link_id).delete()
     return redirect("show_user_graph")
 
 
 def signup(request):
+
     if request.method == "POST":
         form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get("username")
-            raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect("reviews:main_page")
+
+        try:
+            user = User.objects.get(username=request.POST['username'])
+            form.error = "Ce nom d'utilisateur est déjà pris"
+        except User.DoesNotExist:
+
+            try:
+                user = User.objects.get(email=request.POST['email'])
+                print(user, user.email)
+                form.error = "Cette adresse email est déjà enregistrée"
+
+            except User.DoesNotExist:
+
+                if form.is_valid():
+                    form.save()
+
+                    # Login and reidrect to base page
+                    username = form.cleaned_data.get("username")
+                    raw_password = form.cleaned_data.get("password1")
+                    user = authenticate(username=username, password=raw_password)
+                    login(request, user)
+                    return redirect("reviews:main_page")
+                else:
+                    raw_password1 = request.POST["password1"]
+                    raw_password2 = request.POST["password2"]
+                    if raw_password1 != raw_password2:
+                        form.error = "Votre mot de passe n'est pas identique dans les deux champs"
+                    else:
+                        form.error = "Votre mot de passe ne respecte pas les critères obligatoires"
+
     else:
         form = SignUpForm()
+
     return render(request, "registration/signup.html", {"form": form})
