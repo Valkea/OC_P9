@@ -1,4 +1,4 @@
-"""litereview/user_graph URL Configuration
+"""litereview/user URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -13,12 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import path, include
 
-from apps.user_graph import views
+from apps.user import views
 
 urlpatterns = [
-    path("ugraph", views.show_user_graph, name="show_user_graph"),
-    path("ugraph/add", views.add_link, name="add_link"),
-    path("ugraph/del/<int:link_id>", views.remove_link, name="remove_link"),
+    path("", include("django.contrib.auth.urls")),
+    path("signup/", views.signup, name="signup"),
 ]

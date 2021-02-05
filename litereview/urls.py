@@ -20,8 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("zadmin/", admin.site.urls),
-    # path("", include('apps.auth.urls')),
     path("", include("apps.reviews.urls")),
+    path("", include('apps.user.urls')),
     path("", include("apps.user_graph.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

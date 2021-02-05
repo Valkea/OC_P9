@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "apps.reviews",
+    "apps.user",
     "apps.user_graph",
     "django_cleanup.apps.CleanupConfig",
     # 'django.contrib.staticfiles',  # debug_toolbar
@@ -143,12 +144,12 @@ STATICFILES_DIRS = [
 
 
 # Define the default AUTH_USER_MODEL value
-AUTH_USER_MODEL = "user_graph.User"  # TODO ICI
+AUTH_USER_MODEL = "user.User"
 
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = "/auth/login/"
+LOGIN_URL = "login/"
 
 # SMTP settings
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

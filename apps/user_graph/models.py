@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 
 
 class UserFollows(models.Model):
@@ -24,7 +23,3 @@ class UserFollows(models.Model):
             "user",
             "followed_user",
         )
-
-
-class User(AbstractUser):
-    pass

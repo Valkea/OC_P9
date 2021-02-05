@@ -10,9 +10,6 @@ from apps.reviews.models import Ticket, Review
 from apps.user_graph.models import UserFollows
 
 
-# from apps.user_graph.models import User
-
-
 @login_required
 def main_page(request):
 
