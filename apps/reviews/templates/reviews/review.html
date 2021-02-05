@@ -38,7 +38,9 @@
 		{% endwith %}
 	{% else %}
 		<h3>Livre / Article</h3>
-		{{ formticket.as_p }}
+		{% with form=formticket %}
+			{% include 'reviews/ticket_snippet_form.html' %}
+		{% endwith %}
 	{% endif %}
 
 	<h3>Critique</h3>
@@ -53,7 +55,7 @@
 		</div>
 	{% endfor %}
 
-		<input type='submit'>
+		<input type='submit' value="Soumettre">
 	</form>
 
 	</div>

@@ -1,0 +1,19 @@
+{% for field in form %}
+
+<div>
+	<strong>{{ field.label|escape }}</strong>
+	<p>{{ field|escape }}</p>
+	{% if field.label == "Image" %}
+		{% if field.value %}
+			<img src="{{field.value.url}}" alt="cover image"/>
+		{% else %}
+			<p>Pas d'image</p>
+		{% endif %}
+	{% endif %}
+
+	{% for error in field.errors %}
+		<div class="alert alert-danger"><strong>{{ error|escape }}</strong></div>
+	{% endfor %}
+</div>
+
+{% endfor %}

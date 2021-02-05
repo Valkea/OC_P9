@@ -2,51 +2,35 @@
 
 {% block content %}
 
-	<div class="container p-3 my-3 border">
+<div class="container p-3 my-3 border">
 
 	{% if form.errors %}
 		{% for error in form.non_field_errors %}
-			<div class="alert alert-danger">
-				<strong>{{ error|escape }}</strong>
-			</div>
+		<div class="alert alert-danger">
+			<strong>{{ error|escape }}</strong>
+		</div>
 		{% endfor %}
 	{% endif %}
 
 	{% if form.instance.id %}
 
-		<h2>Modifier votre ticket</h2>
-		<form method="POST" action="{% url 'reviews:edit_ticket' ticket_id=form.instance.id %}" enctype="multipart/form-data">
+	<h2>Modifier votre ticket</h2>
+	<form method="POST" action="{% url 'reviews:edit_ticket' ticket_id=form.instance.id %}" enctype="multipart/form-data">
 
 	{% else %}
 
-		<h2>Créer un ticket</h2>
-		<form method="POST" action="{% url 'reviews:add_ticket' %}" enctype="multipart/form-data">
+	<h2>Créer un ticket</h2>
+	<form method="POST" action="{% url 'reviews:add_ticket' %}" enctype="multipart/form-data">
 
 	{% endif %}
 
-	{% csrf_token %}
-	{# {{ form }} #}
-	{% for field in form %}
+		{% csrf_token %}
+		{# {{ form }} #}
+		{% include 'reviews/ticket_snippet_form.html' %}
 
-		<div>
-			<strong>{{ field.label|escape }}</strong>
-			<p>{{ field|escape }}</p>
-			{% if field.label == "Image" %}
-				{% if field.value %}
-					<img src="{{field.value.url}}" alt="cover image"/>
-				{% else %}
-					<p>Pas d'image</p>
-				{% endif %}
-			{% endif %}
-			{% for error in field.errors %}
-				<div class="alert alert-danger"><strong>{{ error|escape }}</strong></div>
-			{% endfor %}
-		</div>
-	{% endfor %}
-
-		<input type='submit'>
+		<input type='submit' value="Soumettre">
 	</form>
 
-	</div>
+</div>
 
 {% endblock %}
