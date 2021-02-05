@@ -13,11 +13,11 @@
 	<p><strong>Revue :</strong> {{post.body}}</p>
 	<p><strong>Evaluation :</strong> {{post.rating}}</p>
 
-	{% with post=post.ticket review_id=post.id has_review=post.has_review %}
+	{% with post=post.ticket review_id=post.id has_review=post.has_review show_alter_btn=False %}
 		{% include 'reviews/ticket_snippet.html' %}
 	{% endwith %}
 
-	{% if post.user == user %}
+	{% if post.user == user and source == 'posts' %}
 		<a class="btn btn-primary" href="{% url 'reviews:del_review' review_id=post.id%}">Supprimer cette critique</a>
 		<a class="btn btn-primary" href="{% url 'reviews:edit_review' review_id=post.id %}">Modifier cette critique</a>
 	{% endif %}

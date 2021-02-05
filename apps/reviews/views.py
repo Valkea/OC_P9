@@ -91,7 +91,7 @@ def main_page(request):
         reverse=True,
     )
 
-    return render(request, "reviews/main.html", {"posts": posts})
+    return render(request, "reviews/main.html", {"posts": posts, "source": "flux"})
 
 
 @login_required
@@ -124,7 +124,7 @@ def user_posts(request):
         reverse=True,
     )
 
-    return render(request, "reviews/main.html", {"posts": posts})
+    return render(request, "reviews/main.html", {"posts": posts, "source": "posts" })
 
 
 @login_required
