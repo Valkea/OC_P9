@@ -3,9 +3,12 @@ from itertools import chain
 from django.db.models import CharField, Value, BooleanField  # , F
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from apps.reviews.forms import TicketForm, ReviewForm
 from apps.reviews.models import Ticket, Review
+from apps.user_graph.models import UserFollows
+
 
 # from apps.user_graph.models import User
 
@@ -49,19 +52,35 @@ def main_page(request):
     #     chain(reviews, tickets), key=lambda post: post['time_created'], reverse=True
     # )
 
-    tickets_without_review = Ticket.objects.filter(review__isnull=True)
+    following = UserFollows.objects.filter(user=request.user).select_related(
+        "followed_user"
+    )
+
+    following = [x.followed_user for x in following]
+    following.append(request.user)
+
+    tickets_without_review = Ticket.objects.filter(
+        review__isnull=True, user__in=following
+    )
+    tickets_with_review = Ticket.objects.filter(
+        review__isnull=False, user__in=following
+    )
+
+    reviews = Review.objects.filter(
+        Q(user__in=following) | Q(ticket__user__in=following)
+    )
+
     tickets_without_review = tickets_without_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(False, BooleanField()),
     )
 
-    tickets_with_review = Ticket.objects.filter(review__isnull=False)
     tickets_with_review = tickets_with_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(True, BooleanField()),
     )
 
-    reviews = Review.objects.annotate(
+    reviews = reviews.annotate(
         content_type=Value("REVIEW", CharField()),
         has_review=Value(True, BooleanField()),
     )
