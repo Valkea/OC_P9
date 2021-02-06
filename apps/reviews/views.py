@@ -13,74 +13,35 @@ from apps.user_graph.models import UserFollows
 @login_required
 def main_page(request):
 
-    # tickets = Ticket.objects.all()
-    # reviews = Review.objects.all()
-    # reviews = reviews.annotate(
-    #             type=Value('TICKET', CharField())
-    #             ).values(
-    #                     'id',
-    #                     'headline',
-    #                     'body',
-    #                     'time_created',
-    #                     'rating',
-    #                     'ticket',
-    #                     'user'
-    #             )
-
-    # tickets = Ticket.objects.all()
-    # tickets = tickets.annotate(
-    #             value=F('review__ticket'),
-    #             type=Value('TICKET', CharField())
-    #             ).values(
-    #                     'id',
-    #                     'title',
-    #                     'description',
-    #                     'user',
-    #                     'image',
-    #                     'time_created',
-    #                     'review__ticket',
-    #                     'type')
-
-    # tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
-    # reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
-
-    # #  combine and sort the two types of posts
-    # posts = sorted(
-    #     chain(reviews, tickets), key=lambda post: post['time_created'], reverse=True
-    # )
-
-    following = UserFollows.objects.filter(user=request.user).select_related(
+    followed = UserFollows.objects.filter(user=request.user).select_related(
         "followed_user"
     )
 
-    following = [x.followed_user for x in following]
-    following.append(request.user)
+    followed = [x.followed_user for x in followed]
+    followed.append(request.user)
 
     tickets_without_review = Ticket.objects.filter(
-        review__isnull=True, user__in=following
-    )
-    tickets_with_review = Ticket.objects.filter(
-        review__isnull=False, user__in=following
+        review__isnull=True, user__in=followed
     )
 
-    reviews = Review.objects.filter(
-        Q(user__in=following) | Q(ticket__user__in=following)
-    )
+    tickets_with_review = Ticket.objects.filter(review__isnull=False, user__in=followed)
+
+    reviews = Review.objects.filter(Q(user__in=followed) | Q(ticket__user__in=followed))
 
     tickets_without_review = tickets_without_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(False, BooleanField()),
-    )
+    ).select_related("user")
 
     tickets_with_review = tickets_with_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(True, BooleanField()),
-    )
+    ).select_related("user")
 
     reviews = reviews.annotate(
         content_type=Value("REVIEW", CharField()),
         has_review=Value(True, BooleanField()),
-    )
+    ).select_related("user")
 
     posts = sorted(
         chain(reviews, tickets_with_review, tickets_without_review),
@@ -100,21 +61,21 @@ def main_page(request):
 @login_required
 def user_posts(request):
 
-    tickets_without_review = Ticket.objects.filter(review__isnull=True).filter(
-        user=request.user
+    tickets_without_review = Ticket.objects.filter(
+        review__isnull=True, user=request.user
     )
+
+    tickets_with_review = Ticket.objects.filter(review__isnull=False, user=request.user)
+
     tickets_without_review = tickets_without_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(False, BooleanField()),
-    )
+    ).select_related("user")
 
-    tickets_with_review = Ticket.objects.filter(review__isnull=False).filter(
-        user=request.user
-    )
     tickets_with_review = tickets_with_review.annotate(
         content_type=Value("TICKET", CharField()),
         has_review=Value(True, BooleanField()),
-    )
+    ).select_related("user")
 
     reviews = Review.objects.annotate(
         content_type=Value("REVIEW", CharField()),
