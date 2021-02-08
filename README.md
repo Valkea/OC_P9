@@ -45,9 +45,7 @@ Once installed, the only command required to use the project is the following on
 
 ### as an admin
 
-visit *http://127.0.0.1:8000/zadmin*
-
-and use the demo credentials below to access the admin content.
+visit *http://127.0.0.1:8000/zadmin* and use the demo credentials to access the admin content:
 
 *demo-login :* supadmin
 
@@ -63,13 +61,15 @@ In the 'User' section you can indeed manage the user's informations but you can 
 
 ### as a reviewer
 
-visit *http://127.0.0.1:8000*
-
-and use the one of the demo credential sets below to access the admin content.
+visit *http://127.0.0.1:8000* and use the one of the demo credentialss below:
 
 #### Alice
 ```
-is an acount with two opened tickets and one review. She is not following any user, and she is not followed by anyone. So she is supposed to see its own tickets & reviews only (unless you make some modifications on any of the accounts).
+Alice is an acount with two opened tickets and one review.
+She is not following any user, and she is not followed by anyone.
+
+So she is supposed to see its own tickets & reviews only
+(unless you make some modifications on any of the accounts).
 ```
 
 *demo-login :* Alice
@@ -79,7 +79,12 @@ is an acount with two opened tickets and one review. She is not following any us
 
 #### Bob
 ```
-is an acount with some opened tickets & reviews. He is not following anyone but he is followed by Carl. So he is supposed to see its own tickets & reviews as well as the reviews wrote by Carl on tickets he (Bob) opened (unless you make some modifications on any of the accounts).
+Bob is an acount with some opened tickets & reviews.
+He is not following anyone but he is followed by Carl.
+
+So he is supposed to see its own tickets & reviews as well as
+the reviews wrote by Carl on tickets he (Bob) opened
+(unless you make some modifications on any of the accounts).
 ```
 
 *demo-login :* Bob	
@@ -89,7 +94,12 @@ is an acount with some opened tickets & reviews. He is not following anyone but 
 
 #### Carl
 ```
-is an acount with some opened tickets & reviews. He is followin Bob and he is not followed by anyone. So he is supposed to see its own tickets & reviews as well as the reviews & tickets wrote by Bob (unless you make some modifications on any of the accounts).
+Carl is an acount with some opened tickets & reviews.
+He is followin Bob and he is not followed by anyone.
+
+So he is supposed to see its own tickets & reviews as
+well as the reviews & tickets wrote by Bob
+(unless you make some modifications on any of the accounts).
 ```
 
 *demo-login :* Carl	
