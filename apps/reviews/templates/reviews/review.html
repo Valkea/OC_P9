@@ -51,7 +51,13 @@
 
 		<div>
 			<strong>{{ field.label|escape }}</strong>
-			<p>{{ field|escape }}</p>
+			{% if field.label == "Evaluation" %}
+				{% for radio in field %}
+					{{radio}}
+				{% endfor %}
+			{% else %}
+				<p>{{ field|escape }}</p>
+			{% endif %}
 			{% for error in field.errors %}
 				<div class="alert alert-danger"><strong>{{ error|escape }}</strong></div>
 			{% endfor %}
