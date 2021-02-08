@@ -65,7 +65,7 @@ visit *http://127.0.0.1:8000* and use the one of the demo credentialss below:
 
 #### Alice
 ```
-Alice is an acount with two opened tickets and one review.
+Alice is an account with two opened tickets and one review.
 She is not following any user, and she is not followed by anyone.
 
 So she is supposed to see its own tickets & reviews only
@@ -74,12 +74,12 @@ So she is supposed to see its own tickets & reviews only
 
 *demo-login :* Alice
 
-*demo-password :* lapin
+*demo-password :* merveille
 
 
 #### Bob
 ```
-Bob is an acount with some opened tickets & reviews.
+Bob is an account with some opened tickets & reviews.
 He is not following anyone but he is followed by Carl.
 
 So he is supposed to see its own tickets & reviews as well as
@@ -89,13 +89,13 @@ the reviews wrote by Carl on tickets he (Bob) opened
 
 *demo-login :* Bob	
 
-*demo-password :* python
+*demo-password :* monstres
 
 
 #### Carl
 ```
-Carl is an acount with some opened tickets & reviews.
-He is followin Bob and he is not followed by anyone.
+Carl is an account with some opened tickets & reviews.
+He is following Bob and he is not followed by anyone.
 
 So he is supposed to see its own tickets & reviews as
 well as the reviews & tickets wrote by Bob
@@ -104,11 +104,11 @@ well as the reviews & tickets wrote by Bob
 
 *demo-login :* Carl	
 
-*demo-password :* hal9000
+*demo-password :* hal9000!
 
-## Static & Medias
+## Statics & Medias
 
-The uploaded pictures are stored in the "media" folder.
+The uploaded pictures are stored in the "media" folder. They are automatically removed when replaced in a ticket or whenever the review is removed.
 
 The CSS & HTML files are stored in the 'static' & 'template' folders in the root (when global) or in their respective application folders (when tied to a specific application).
 
