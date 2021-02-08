@@ -5,7 +5,7 @@
 	<p>{{ field|escape }}</p>
 	{% if field.label == "Image" %}
 		{% if field.value %}
-			<img src="{{field.value.url}}" alt="cover image"/>
+			<img src="{{field.value.url}}" alt="cover image" class="img-responsive fit-image"/>
 		{% else %}
 			<p>Pas d'image</p>
 		{% endif %}
