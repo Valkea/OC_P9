@@ -6,6 +6,19 @@ from .models import User
 
 
 def signup(request):
+    """
+    Handle the creation process of a new :model:`user.User` instance.
+
+    **Context**
+
+    ``form``
+        An instance of the :model:`user.forms.SignUpForm`
+
+    **Template:**
+
+    :template:'registration/signup.html'
+
+    """
 
     if request.method == "POST":
         form = SignUpForm(request.POST)
