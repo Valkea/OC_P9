@@ -43,22 +43,6 @@ Once installed, the only command required to use the project is the following on
 
 ## Using the project
 
-### as an admin
-
-visit *http://127.0.0.1:8000/zadmin* and use the demo credentials to access the admin content:
-
-*demo-login :* supadmin
-
-*demo-password :* demopass
-
-**this account need to be removed / changed before going into production !**
-
-Once in the admin, you will be able to add, edit or remove 'users', 'tickets' and 'reviews'.
-
-In the 'Ticket' section you can preview & access the linked 'Review' (if any).
-In the 'User' section you can indeed manage the user's informations but you can also see and edit followed and following users as-well.
-
-
 ### as a reviewer
 
 visit *http://127.0.0.1:8000* and use the one of the demo credentialss below:
@@ -105,6 +89,23 @@ well as the reviews & tickets wrote by Bob
 *demo-login :* Carl	
 
 *demo-password :* hal9000!
+
+
+### as an admin
+
+visit *http://127.0.0.1:8000/zadmin* and use the demo credentials to access the admin content:
+
+*demo-login :* supadmin
+
+*demo-password :* demopass
+
+**this account need to be removed / changed before going into production !**
+
+Once in the admin, you will be able to add, edit or remove 'users', 'tickets' and 'reviews'.
+
+In the 'Ticket' section you can preview & access the linked 'Review' (if any).
+In the 'User' section you can indeed manage the user's informations but you can also see and edit followed and following users as-well.
+
 
 ## Statics & Medias
 
