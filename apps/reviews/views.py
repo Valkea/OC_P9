@@ -335,7 +335,7 @@ def delete_review(request, review_id):
 
 
 def redirect_flux(source):
-    """ Redirect to 'main_page' or 'user_posts' views according to the provided parameter.
+    """Redirect to 'main_page' or 'user_posts' views according to the provided parameter.
 
     Parameters
     ----------

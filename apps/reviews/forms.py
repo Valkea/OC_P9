@@ -26,7 +26,7 @@ class ReviewForm(ModelForm):
     # rating = CharField(label='Rating', widget=TextInput(attrs={'min': 1, 'max': '5', 'type': 'number'}))
     CHOICES = [(str(x), str(x)) for x in range(0, 6)]
     # CHOICES = [('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
-    rating = ChoiceField(label='Evaluation', widget=RadioSelect, choices=CHOICES)
+    rating = ChoiceField(label="Evaluation", widget=RadioSelect, choices=CHOICES)
 
     class Meta:
         model = Review
