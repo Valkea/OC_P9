@@ -13,7 +13,7 @@
 	<p><strong>Desc :</strong> {{post.description | linebreaksbr}}</p>
 
 	{% if post.image %}
-		<img src="{{post.image.url}}" alt="cover image" class="img-responsive fit-image"/><br><br>
+		<img src="{{post.image.url}}" alt="cover image" class="img-responsive ticket__image"/><br><br>
 	{% else %}
 		<p>Pas d'image</p>
 	{% endif %}

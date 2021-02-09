@@ -1,4 +1,11 @@
-from django.forms import ModelForm, ImageField, FileInput, RadioSelect, ChoiceField, Textarea
+from django.forms import (
+    ModelForm,
+    ImageField,
+    FileInput,
+    RadioSelect,
+    ChoiceField,
+    Textarea,
+)
 
 from apps.reviews.models import Ticket, Review
 
@@ -22,7 +29,7 @@ class TicketForm(ModelForm):
         }
 
         widgets = {
-          'description': Textarea(attrs={'class': 'textarea'}),
+            "description": Textarea(attrs={"class": "ticket__textarea"}),
         }
 
 
@@ -43,5 +50,5 @@ class ReviewForm(ModelForm):
         }
 
         widgets = {
-          'body': Textarea(attrs={'class': 'textarea'}),
+            "body": Textarea(attrs={"class": "review__textarea"}),
         }

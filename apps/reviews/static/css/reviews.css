@@ -1,20 +1,16 @@
-.fit-image{
+.ticket__image{
 	width: 100%;
 	object-fit: contain;
 	height: 300px; /* only if you want fixed height */
 }
 
-.nav-margin{
-	margin-top:300px;
-}
-
-.rating{
+.review__rating{
 	font-size:2rem;
 	color:orange;
 	vertical-align: middle;
 }
 
-.textarea {
+.review__textarea, .ticket__textarea {
 	display: block;
 	width: 100%;
 	overflow: hidden;
