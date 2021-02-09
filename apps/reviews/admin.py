@@ -41,6 +41,9 @@ class TicketAdmin(admin.ModelAdmin):
     ticket_photo.admin_order_field = "image"  # Allows column order sorting
     ticket_photo.short_description = "Vignette"  # Renames column head
 
+    def has_add_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
@@ -85,3 +88,6 @@ class ReviewAdmin(admin.ModelAdmin):
 
     ticket_photo.admin_order_field = "image"  # Allows column order sorting
     ticket_photo.short_description = "Vignette"  # renames column head
+
+    def has_add_permission(self, request, obj=None):
+        return False
