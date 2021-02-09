@@ -1,23 +1,27 @@
-<div class="container p-3 my-3 border">
+<article class="container p-3 my-3 border ticket">
 
-	<p>
+	<header>
 	{% if post.user == user %}
 		<span><strong>Vous</strong> avez demandé une critique (ticket)</span> |
 	{% else %}
 		<span><strong>{{post.user.username}}</strong> a demandé une critique (ticket)</span> |
 	{% endif %}
-		<span><strong>Date :</strong> {{post.time_created|date:'H:i, d M Y' }}</span>
-	</p>
+	<span><strong>Date :</strong><time datetime="{{post.time_created|date:'d-m-Y H:i:s'}}">{{post.time_created|date:'H:i, d M Y' }}</time></span>
+	</header>
 
-	<p><strong>Title :</strong> {{post.title}}</p>
-	<p><strong>Desc :</strong> {{post.description | linebreaksbr}}</p>
+	<section>
+		<hr>
+		<p><strong>Title :</strong> {{post.title}}</p>
+		<p><strong>Desc :</strong> {{post.description | linebreaksbr}}</p>
 
-	{% if post.image %}
-		<img src="{{post.image.url}}" alt="cover image" class="img-responsive ticket__image"/><br><br>
-	{% else %}
-		<p>Pas d'image</p>
-	{% endif %}
+		{% if post.image %}
+			<img src="{{post.image.url}}" alt="cover image" class="img-responsive ticket__image"/><br><br>
+		{% else %}
+			<p>Pas d'image</p>
+		{% endif %}
+	</section>
 
+	<footer>
 	{% if not has_review %}
 		<a class="btn btn-primary" href="{% url 'reviews:add_review' ticket_id=post.id%}">Ajouter une critique</a>
 	{% endif %}
@@ -26,5 +30,6 @@
 		<a class="btn btn-primary" href="{% url 'reviews:del_ticket' ticket_id=post.id%}">Supprimer ce ticket</a>
 		<a class="btn btn-primary" href="{% url 'reviews:edit_ticket' ticket_id=post.id %}">Modifier ce ticket</a>
 	{% endif %}
+	</footer>
 
-</div>
+</article>
