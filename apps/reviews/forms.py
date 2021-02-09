@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ImageField, FileInput, RadioSelect, ChoiceField
+from django.forms import ModelForm, ImageField, FileInput, RadioSelect, ChoiceField, Textarea
 
 from apps.reviews.models import Ticket, Review
 
@@ -21,6 +21,10 @@ class TicketForm(ModelForm):
             "description": "Description",
         }
 
+        widgets = {
+          'description': Textarea(attrs={'class': 'textarea'}),
+        }
+
 
 class ReviewForm(ModelForm):
     # rating = CharField(label='Rating', widget=TextInput(attrs={'min': 1, 'max': '5', 'type': 'number'}))
@@ -36,4 +40,8 @@ class ReviewForm(ModelForm):
             "headline": "Titre de la revue",
             "rating": "Evaluation",
             "body": "Revue",
+        }
+
+        widgets = {
+          'body': Textarea(attrs={'class': 'textarea'}),
         }
