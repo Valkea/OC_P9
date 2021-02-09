@@ -45,7 +45,7 @@ Once installed, the only command required to use the project is the following on
 
 ### as a reviewer
 
-visit *http://127.0.0.1:8000* and use the one of the demo credentialss below:
+visit *http://127.0.0.1:8000* and use the one of the demo credentials below:
 
 #### Alice
 ```
@@ -107,6 +107,13 @@ In the 'Ticket' section you can preview & access the linked 'Review' (if any).
 In the 'User' section you can indeed manage the user's informations but you can also see and edit followed and following users as-well.
 
 
+### password recovery
+
+This part of the project is fully fonctionnal, but for security reason the email and password were remove from the settings.py file.
+
+So before using / tesing this part, you need to provide email credentials in the 'litereview/settings.py' file first.
+
+
 ## Statics & Medias
 
 The uploaded pictures are stored in the "media" folder. They are automatically removed when replaced in a ticket or whenever the review is removed.
@@ -117,6 +124,7 @@ The CSS & HTML files are stored in the 'static' & 'template' folders in the root
 ## Documentation
 
 The applications views are documented using the Django admindoc format.
+
 However the admindoc module is not activated at the moment.
 
 
