@@ -11,7 +11,18 @@
 
 	<p><strong>Titre de revue :</strong> {{post.headline}}</p>
 	<p><strong>Revue :</strong> {{post.body | linebreaksbr}}</p>
-	<p><strong>Evaluation :</strong> {{post.rating}}</p>
+	<p><strong>Evaluation :</strong>
+	<span class="rating">
+		{% with ''|center:5 as range %}
+			{% for _ in range %}
+				{% if forloop.counter <= post.rating %}
+					<span>★</span>
+				{% else %}
+					<span>☆</span>
+				{% endif %}
+			{% endfor %}
+		{% endwith %}
+	</span></p>
 
 	{% with post=post.ticket review_id=post.id has_review=post.has_review show_alter_btn=False %}
 		{% include 'reviews/ticket_snippet.html' %}

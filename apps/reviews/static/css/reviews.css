@@ -7,3 +7,9 @@
 .nav-margin{
 	margin-top:300px;
 }
+
+.rating{
+	font-size:2rem;
+	color:orange;
+	vertical-align: middle;
+}
